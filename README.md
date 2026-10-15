@@ -2,15 +2,15 @@
 
 A complete Spanish-language website for Happy Run, a new social run club in Madrid. Original identity, responsive layouts, filterable session proposals, accessible run-detail dialogs, real map destinations, copyable plans, a newcomer guide, privacy information and a custom 404 page.
 
-**[Visit Happy Run Madrid](https://alvarovillalbaa.github.io/happy-run/)** · [Phone preview](docs/preview-mobile.jpg)
+**[Visit Happy Run Madrid](https://happy-run-six.vercel.app/)** · [Phone preview](docs/preview-mobile.jpg)
 
 ![Happy Run desktop preview](docs/preview-desktop.jpg)
 
-Built with semantic HTML, CSS and browser-native JavaScript modules. There are **no package dependencies, build step, third-party scripts, registration backend or required environment variables**. Fonts and imagery are included locally.
+Built with semantic HTML, CSS and browser-native JavaScript modules. There are **no package dependencies, third-party scripts, registration backend or required environment variables**. Fonts and imagery are included locally.
 
 ## Run locally
 
-Requires Node.js 22 or newer. No installation is needed.
+Requires Node.js 22 or newer. No installation is needed. `npm run build` copies only the public allowlist to `dist/` for hosting.
 
 ```sh
 npm start
@@ -40,11 +40,11 @@ The default launch state is intentional: people can explore proposals, open the 
 
 ## Publish
 
-The project works from a static host, including the GitHub Pages subpath `/happy-run/`. No deployment workflow or cloud services are required. The repository root contains the ready-to-serve site; `.nojekyll` prevents Jekyll processing.
+Vercel hosts the website on Clous Team (Pro). The project is connected to `alvarovillalbaa/happy-run`, with `main` as its production branch. `vercel.json` runs `npm run build` and serves only the public files copied into `dist/`. No install step or environment variables are required.
 
-GitHub Pages is enabled with owner authorization: **Deploy from a branch → main → /(root)**. Pushing to `main` publishes the current static files at `https://alvarovillalbaa.github.io/happy-run/`.
+Production: **https://happy-run-six.vercel.app/**. Pushes to `main` deploy through Vercel. See [deployment evidence](docs/deployment.md) for the verified cutover and current limits.
 
-For a different repository name or domain, update the Open Graph URLs in `index.html`, the home link in `404.html`, and the optional local project prefix in `scripts/serve.mjs`. Use HTTPS in production for Clipboard API support; a manual text-selection fallback is provided.
+For a different domain, update the Open Graph URLs in `index.html`. The 404 page returns to `/`; the local server also supports the former project prefix for local checks. Use HTTPS in production for Clipboard API support; a manual text-selection fallback is provided.
 
 ## Sources and handoff
 
