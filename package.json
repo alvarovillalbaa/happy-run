@@ -1,0 +1,14 @@
+{
+  "name": "happy-run-madrid",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Happy Run — un club para correr y compartir Madrid.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "node --check app.js && node --check club.js && node --check scripts/serve.mjs && node scripts/check.mjs",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=22" }
+}
