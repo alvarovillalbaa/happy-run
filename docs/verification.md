@@ -1,5 +1,7 @@
 # Verification
 
+Current hosting and migration evidence: [Vercel deployment](deployment.md). The Pages checks below describe the initial launch.
+
 Verified on 15 October 2026 against the source in this repository and the deployed GitHub Pages website.
 
 ## Publication evidence

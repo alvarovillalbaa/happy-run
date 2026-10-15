@@ -1,0 +1,115 @@
+{
+  "verifiedDate": "2026-10-15",
+  "target": "production",
+  "status": "READY",
+  "framework": "Other (static HTML)",
+  "source": "git",
+  "commit": "26a838a9792fb1f853cbd7b0a0ddbb619bb14891",
+  "deploymentId": "dpl_6mRy9J11VBnuiggEUa3S3RBdj79R",
+  "url": "happy-npa49dlud-my-team-4f230354.vercel.app",
+  "aliases": [
+    "happy-run-six.vercel.app",
+    "happy-run-my-team-4f230354.vercel.app",
+    "happy-run-git-main-my-team-4f230354.vercel.app"
+  ],
+  "buildDurationSeconds": 1.9,
+  "githubPagesEnabled": false,
+  "githubPagesUrlStatus": 404,
+  "productionHttpChecks": 15,
+  "expected404Checks": 5,
+  "byteComparedFiles": 10,
+  "runtimeErrorScan": "No runtime errors found in last 1h",
+  "drains": "Inventory unavailable: Vercel endpoint returned 404",
+  "checks": [
+    {
+      "url": "https://happy-run-six.vercel.app/",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/privacy.html",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/404.html",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/styles.css",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/app.js",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/club.js",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/assets/bricolage-grotesque.ttf",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/assets/smile.svg",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/assets/OFL.txt",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/assets/happy-run-madrid.jpg",
+      "status": 200,
+      "expected": 200,
+      "byteCompared": true
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/missing/nested-page",
+      "status": 404,
+      "expected": 404,
+      "byteCompared": false
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/AGENTS.md",
+      "status": 404,
+      "expected": 404,
+      "byteCompared": false
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/package.json",
+      "status": 404,
+      "expected": 404,
+      "byteCompared": false
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/scripts/build.mjs",
+      "status": 404,
+      "expected": 404,
+      "byteCompared": false
+    },
+    {
+      "url": "https://happy-run-six.vercel.app/docs/deployment.md",
+      "status": 404,
+      "expected": 404,
+      "byteCompared": false
+    }
+  ]
+}
