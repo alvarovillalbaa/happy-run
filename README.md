@@ -2,6 +2,10 @@
 
 A complete Spanish-language website for Happy Run, a new social run club in Madrid. Original identity, responsive layouts, filterable session proposals, accessible run-detail dialogs, real map destinations, copyable plans, a newcomer guide, privacy information and a custom 404 page.
 
+**[Visit Happy Run Madrid](https://alvarovillalbaa.github.io/happy-run/)** · [Phone preview](docs/preview-mobile.jpg)
+
+![Happy Run desktop preview](docs/preview-desktop.jpg)
+
 Built with semantic HTML, CSS and browser-native JavaScript modules. There are **no package dependencies, build step, third-party scripts, registration backend or required environment variables**. Fonts and imagery are included locally.
 
 ## Run locally
@@ -38,7 +42,7 @@ The default launch state is intentional: people can explore proposals, open the 
 
 The project works from a static host, including the GitHub Pages subpath `/happy-run/`. No deployment workflow or cloud services are required. The repository root contains the ready-to-serve site; `.nojekyll` prevents Jekyll processing.
 
-For GitHub Pages, enable **Deploy from a branch → main → /(root)** in repository Settings → Pages. Do this only with the owner's deployment authorization. The expected address is `https://alvarovillalbaa.github.io/happy-run/`.
+GitHub Pages is enabled with owner authorization: **Deploy from a branch → main → /(root)**. Pushing to `main` publishes the current static files at `https://alvarovillalbaa.github.io/happy-run/`.
 
 For a different repository name or domain, update the Open Graph URLs in `index.html`, the home link in `404.html`, and the optional local project prefix in `scripts/serve.mjs`. Use HTTPS in production for Clipboard API support; a manual text-selection fallback is provided.
 
