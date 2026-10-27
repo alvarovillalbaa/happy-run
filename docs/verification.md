@@ -92,4 +92,21 @@ assets, anchors and club configuration; `git diff --check` passed. Independent
 review found no remaining concrete issue in the repair and focused cases. The
 local HTTP test was not run; this change is entirely client-side. No browser,
 OS clipboard, backend, dependency install or local build ran. Historical browser
-results above retain their original scope. Source/hosted publication is pending.
+results above retain their original scope.
+
+Published source
+[`565d8e0868a0153328689788f25d15d3a7c1610a`](https://github.com/alvarovillalbaa/happy-run/commit/565d8e0868a0153328689788f25d15d3a7c1610a)
+is deployed by the existing Git integration as production
+[`dpl_5rQD4a8D3pDYCq5aQ8kW48XhvvCn`](https://vercel.com/my-team-4f230354/happy-run/5rQD4a8D3pDYCq5aQ8kW48XhvvCn),
+READY, static framework, 2.714-second build. The canonical alias lookup resolves
+to that deployment and source commit. Public GETs for `/`, `/app.js` and
+`/club.js` returned 200 and matched source bytes. The served `app.js` SHA256 is
+`bbe73b811cd832da48be3f4ece9cc958782323a4c7480baa5c766c8811f43e28`;
+immutable GitHub file readback matches local blob
+`8d8c4e2e7d4ab2e7f6a4f1ef5f9c19e43b3ca778`.
+
+The connected project runtime-error query returned no errors in its default
+selected range; it does not establish browser telemetry or continuous monitoring.
+An initial Python HTTP request could not resolve DNS; ordinary curl requests
+succeeded without changing permissions. All task-owned temporary source/log and
+download files were removed after checking, and test processes are terminal.

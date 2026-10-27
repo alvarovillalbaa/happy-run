@@ -21,3 +21,15 @@ The cutover below supersedes the original GitHub Pages hosting. Earlier Pages/br
 - **Observability:** the last-hour Vercel runtime-error scan returned no errors. Drains inventory returned HTTP 404, so drains/continuous monitoring are unverified. Static delivery and HTTP checks do not prove browser interactions or physical audio output.
 
 The migration adds no dependencies or required environment variables. Browser interaction QA was not rerun against these Vercel sites; earlier browser evidence remains scoped to its original deployment. The following evidence-only commit may trigger a fresh build; the source commit above identifies the fully checked migration build.
+
+## Clipboard repair — 27 October 2026
+
+Source `565d8e0868a0153328689788f25d15d3a7c1610a` is production READY as
+[`dpl_5rQD4a8D3pDYCq5aQ8kW48XhvvCn`](https://vercel.com/my-team-4f230354/happy-run/5rQD4a8D3pDYCq5aQ8kW48XhvvCn),
+with a 2.714-second build through the existing Git integration. The canonical
+alias resolves to this deployment. Homepage/app/club GETs return 200 and match
+source bytes; connected GitHub readback matches the app blob. The focused
+frontend checks passed 25 tests, with regression sensitivity established against
+the original source. See [verification](verification.md#clipboard-completion-repair--27-october-2026)
+for exact counts, hashes and limits. No CI, provider, dependency or hosting
+configuration changed. A docs-only follow-up may redeploy the same app bytes.
