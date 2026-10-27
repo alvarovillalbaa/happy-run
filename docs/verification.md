@@ -54,3 +54,9 @@ Temporary viewport overrides were reset after verification.
 ## Verification limits
 
 Chrome with responsive viewport overrides was checked; physical devices, Safari and Firefox were not tested. This is not a full accessibility or performance audit. The clipboard failure fallback is implemented but was not forced during the live browser check. Real routes, organizer permissions and real-world events have not been verified and are not represented as confirmed. The owner explicitly requested placeholders until those details are available.
+
+## Open clipboard finding — 27 October 2026
+
+Source inspection of `2bfa51508a1224db9cda6c721765991a8e24836d` found a completion race in `app.js`. Start copying plan A, close it and open B while the clipboard promise waits: A's later success can label B as copied, or its failure can insert A's fallback text and move focus into B. `openSession` resets the visible status but does not invalidate the pending operation. The copied-plan requirement still applies to the selected session.
+
+Guard both completion paths with the selected session and a dialog/copy generation, invalidated on close/reopen/new copy. Preserve the existing proposal warnings and normal current-plan fallback. This is an open source finding, not a repair or a new browser result; no clipboard operation, test or runtime check was performed during this inspection. Historical checks above retain their original scope.
