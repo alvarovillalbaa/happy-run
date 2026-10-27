@@ -55,8 +55,41 @@ Temporary viewport overrides were reset after verification.
 
 Chrome with responsive viewport overrides was checked; physical devices, Safari and Firefox were not tested. This is not a full accessibility or performance audit. The clipboard failure fallback is implemented but was not forced during the live browser check. Real routes, organizer permissions and real-world events have not been verified and are not represented as confirmed. The owner explicitly requested placeholders until those details are available.
 
-## Open clipboard finding — 27 October 2026
+## Clipboard completion repair — 27 October 2026
 
 Source inspection of `2bfa51508a1224db9cda6c721765991a8e24836d` found a completion race in `app.js`. Start copying plan A, close it and open B while the clipboard promise waits: A's later success can label B as copied, or its failure can insert A's fallback text and move focus into B. `openSession` resets the visible status but does not invalidate the pending operation. The copied-plan requirement still applies to the selected session.
 
-Guard both completion paths with the selected session and a dialog/copy generation, invalidated on close/reopen/new copy. Preserve the existing proposal warnings and normal current-plan fallback. This is an open source finding, not a repair or a new browser result; no clipboard operation, test or runtime check was performed during this inspection. Historical checks above retain their original scope.
+The repair in `app.js` captures the selected session and copy generation, and
+checks both plus `dialog.open` before either completion can change feedback,
+fallback text or focus. Opening a plan, starting another copy and processing an
+actual close invalidate older requests. Close handling clears references and
+focuses only a connected trigger. A queued close event is ignored if another
+plan is already open. Current-plan rejection still exposes the exact proposed
+plan as selectable fallback text; a fresh copy clears older feedback.
+
+The [HTML dialog closing algorithm](https://html.spec.whatwg.org/multipage/interactive-elements.html#close-the-dialog)
+queues the close event after removing the open attribute. The source guard
+therefore covers the closed interval before that event and a later reopen.
+The [Clipboard API](https://www.w3.org/TR/clipboard-apis/#dom-clipboard-writetext)
+starts an asynchronous write; this repair suppresses stale page effects and
+does not cancel an OS clipboard operation already requested.
+
+The new `tests/regression/clipboard.test.mjs` executes the actual application
+listeners in a Node VM with mocked DOM and clipboard promises (T2 data). It uses
+real `club.js` payload generation and checks user-visible status, fallback
+content, focus and selection. It is not browser/native-dialog/permission proof.
+On Node v26.8.2, the focused command below passed **25 tests**: 21 clipboard
+regressions and four existing club tests. The same 21 clipboard cases against
+immutable source `054013e39859d2724f9cad25ca5476ae98c190cd` produced **four passes
+and 17 failures**. Baseline/fixed runs used the same harness and runner options.
+
+```sh
+node --test --test-isolation=none tests/regression/clipboard.test.mjs tests/club.test.mjs
+```
+
+`npm run check` passed all 10 public files, JavaScript syntax, local links,
+assets, anchors and club configuration; `git diff --check` passed. Independent
+review found no remaining concrete issue in the repair and focused cases. The
+local HTTP test was not run; this change is entirely client-side. No browser,
+OS clipboard, backend, dependency install or local build ran. Historical browser
+results above retain their original scope. Source/hosted publication is pending.

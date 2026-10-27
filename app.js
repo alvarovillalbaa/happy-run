@@ -5,6 +5,7 @@ const dialog = document.querySelector('#run-dialog');
 const copyStatus = document.querySelector('#copy-status');
 let selectedSession;
 let activeCard;
+let copyGeneration = 0;
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -23,7 +24,14 @@ function locationIcon() {
   return svg;
 }
 
+function clearCopyFeedback() {
+  copyStatus.textContent = '';
+  dialog.querySelector('.copy-fallback')?.remove();
+  dialog.querySelector('.copy-fallback-label')?.remove();
+}
+
 function openSession(session, trigger) {
+  copyGeneration += 1;
   selectedSession = session;
   activeCard = trigger;
   document.querySelector('#dialog-status').textContent = session.confirmed ? 'QUEDADA SEMANAL · MADRID' : 'PLAN PROPUESTO · POR CONFIRMAR';
@@ -45,9 +53,7 @@ function openSession(session, trigger) {
     facts.append(row);
   }
   document.querySelector('#dialog-map').href = mapUrl(session);
-  copyStatus.textContent = '';
-  dialog.querySelector('.copy-fallback')?.remove();
-  dialog.querySelector('.copy-fallback-label')?.remove();
+  clearCopyFeedback();
   dialog.showModal();
 }
 
@@ -118,15 +124,30 @@ dialog.addEventListener('click', (event) => {
   const rect = dialog.getBoundingClientRect();
   if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
 });
-dialog.addEventListener('close', () => activeCard?.focus({ preventScroll: true }));
+dialog.addEventListener('close', () => {
+  // A queued close event can arrive after another plan has opened.
+  if (dialog.open) return;
+  copyGeneration += 1;
+  selectedSession = undefined;
+  clearCopyFeedback();
+  const trigger = activeCard;
+  activeCard = undefined;
+  if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+});
 
 document.querySelector('#copy-plan').addEventListener('click', async () => {
-  if (!selectedSession) return;
-  const text = planText(selectedSession);
+  if (!selectedSession || !dialog.open) return;
+  const session = selectedSession;
+  const generation = ++copyGeneration;
+  const isCurrent = () => dialog.open && selectedSession === session && copyGeneration === generation;
+  const text = planText(session);
+  clearCopyFeedback();
   try {
     await navigator.clipboard.writeText(text);
+    if (!isCurrent()) return;
     copyStatus.textContent = 'Plan copiado. ¡Compártelo con quien te apetezca!';
   } catch {
+    if (!isCurrent()) return;
     copyStatus.textContent = 'No se ha podido copiar automáticamente. Selecciona y copia el texto de abajo.';
     let fallback = dialog.querySelector('.copy-fallback');
     if (!fallback) {
